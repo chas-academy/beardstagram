@@ -1,0 +1,19 @@
+.App-header {
+    background-color: #fff;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.App-header__logo {
+    font-family: Pacifico, cursive;
+}
+
+.App-header__nav {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+.App-header__nav a {
+    text-decoration: none;
+    color: #222;
+}
