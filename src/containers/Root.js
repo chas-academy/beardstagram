@@ -1,20 +1,30 @@
-import React from 'react';
-import { Switch, Route} from 'react-router-dom';
+import React from "react";
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunk from 'redux-thunk'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import { Home, Profile, Explore, SignUp, SignIn, NotFoundPage } from '../views';
+import { App } from "components";
+
+import rootReducer from 'reducers';
+
+const middleware = [ thunk ];
+
+const store = createStore(
+  rootReducer,
+  applyMiddleware(...middleware)
+);
 
 const Root = () => {
-    return (
+  return (
+    <Provider store={store}>
+      <Router>
         <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/explore" component={Explore} />
-            <Route path="/signup" component={SignUp} />
-            <Route path="/signin" component={SignIn} />
-            <Route component={NotFoundPage} />
+          <Route path="/" component={App} />
         </Switch>
-    )
-}
-
+      </Router>
+    </Provider>
+  );
+};
 
 export default Root;
