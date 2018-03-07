@@ -2,23 +2,10 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 
-router.use(bodyParser.urlencoded( { extended: true } ));
-var User = require('./User');
+router.use(bodyParser.urlencoded( { extended: false } ));
+router.use(bodyParser.json());
 
-router.post('/register', function(req, res) {
-    User.create({
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password
-    }, function(error, user) {
-        // Inside the callback now, we have either a) successfully created the user or b) something went horribly wrong
-        if (error) {
-            return res.status(500).send("An error occured while trying to add information to the database " + error);
-        } else {
-            res.status(200).send(user);
-        }
-    });
-});
+var User = require('../models/User');
 
 router.get('/', function(req, res) {
     User.find({}, function(error, users) {

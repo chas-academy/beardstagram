@@ -12,7 +12,8 @@ UserSchema.pre('save', function(next) {
     var user = this;
     var roundsOfSalt = 5;
 
-    // TODO: fail-safe here if password is not changed
+    // Fail-safe here if password is not changed
+    if (!user.isModified('password')) return next();
 
     bcrypt.genSalt(roundsOfSalt, function(error, salt) {
         if (error) return next(error);
